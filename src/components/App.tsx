@@ -3,14 +3,15 @@ import {Statistics} from "./Statistics/Statistics"
 import { FeedbackOptions } from "./Feedback/Feedback";
 import { Section } from "./Section/Section";
 import { Notification } from "./Notification/Notification";
+import React from "react";
 
-export const App = () => {
+export const App = (): JSX.Element => {
 const [good, setGood] = useState(0);
 const [neutral, setNeutral] = useState(0);
 const [bad, setBad] = useState(0);
 
-  const handleFeedback = (event) =>{
-    const { name } = event.target
+  const handleFeedback = (event : React.MouseEvent<HTMLButtonElement> ):void =>{
+    const { name } = event.target as EventTarget & {name :string}
     
     if(name === "good"){
     setGood(ps => {return ps + 1})
@@ -22,12 +23,12 @@ const [bad, setBad] = useState(0);
 
   }
 
-  const countTotalFeedback = () =>{
+  const countTotalFeedback = (): number =>{
     const result = good + neutral + bad
     return result
   } 
 
-const countPositiveFeedbackPercentage = () =>{
+const countPositiveFeedbackPercentage = ():number =>{
      const result = good * 100 / countTotalFeedback()
      return Math.round(result)
 }
